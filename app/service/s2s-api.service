@@ -1,0 +1,14 @@
+[Unit]
+Description=S2S API Server
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=root
+Group=root
+PermissionsStartOnly=true
+ExecStart=/vagrant/api/Stock2ShopAPI.py
+TimeoutSec=600
+Restart=on-failure
+RuntimeDirectoryMode=755
