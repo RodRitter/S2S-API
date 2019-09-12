@@ -21,7 +21,7 @@ API: http://localhost:5000/
 
 - `/products/` - [GET] Will return all products
 - `/products/` - [POST] Will create a new product
-  - parameters: sku string | attributes array(object) `{key: foo, value: bar}`
+  - parameters: sku string | attributes array(object) `[{key: foo, value: bar}]`
 
 ## Directory Structure
 - `[apache]` - Holds all the apache site .conf files. They are copied to their location when the machine is provisioned
