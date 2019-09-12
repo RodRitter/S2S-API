@@ -51,7 +51,7 @@ Backend:
 
 #### Minor changes
 - I would change the structure of the `attributes` API structure to allow for easier accessibility to key/value pairs. The less parsing the frontend has to do, the better.
-ie. Instead of `attributes: [{foo: bar, ...}]` I would do something like `attributes: [{key: foo, value: bar}, {...}]`
+ie. Instead of `attributes: {foo: bar, ...}` I would do something like `attributes: [{key: foo, value: bar}, {...}]`
 - Then I'd find a better way to create automated documentation, using decorators instead of manually creating the blueprint
 
 
