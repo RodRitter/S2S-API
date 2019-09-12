@@ -20,6 +20,7 @@ database = mysql.connector.connect(
 
 cur = database.cursor()
 
+
 @app.route("/products", methods=['GET', 'POST'])
 def endpoint_products():
     if request.method == 'GET':
@@ -30,7 +31,13 @@ def endpoint_products():
         for p in products:
             psku = p[1]
             pattributes = {}
-            cur.execute("SELECT * FROM attributes where product_id={}".format(p[0]))
+            cur.execute(
+                """
+                SELECT *
+                FROM attributes
+                where product_id={}
+                """.format(p[0]))
+
             attributes = cur.fetchall()
             for a in attributes:
                 pattributes[a[2]] = a[3]
@@ -44,21 +51,33 @@ def endpoint_products():
         pattr = product_json['attributes']
 
         try:
-            cur.execute("INSERT INTO products (sku) VALUES ('{}');".format(psku))
+            cur.execute(
+                """
+                INSERT INTO products (sku)
+                VALUES ('{}');
+                """.format(psku))
+
             database.commit()
         except TypeError as e:
             return jsonify({'error': e}), 418
 
         pid = cur.lastrowid
-        
+
         for a in pattr:
             try:
-                cur.execute("INSERT INTO attributes (product_id, attribute_key, attribute_value) VALUES ('{}', '{}', '{}');".format(pid, a['key'], a['value']))
+                cur.execute(
+                    """
+                    INSERT INTO attributes
+                    (product_id, attribute_key, attribute_value)
+                    VALUES ('{}', '{}', '{}');
+                    """.format(pid, a['key'], a['value']))
+
                 database.commit()
             except TypeError as e:
                 return jsonify({'error': e}), 418
 
         return jsonify({'status': 'ok'}), 200
+
 
 @app.route("/spec")
 def spec():
@@ -95,7 +114,8 @@ def spec():
                     "name": "attributes",
                     "in": "path",
                     "required": "true",
-                    "description": "A list of attributes for the product. example: `{key: 'foo', value: 'bar'}`",
+                    "description": "A list of attributes for the product. \
+                                    example: `{key: 'foo', value: 'bar'}`",
                     "type": "Array<Object>"
                 }
             ],
@@ -109,17 +129,17 @@ def spec():
 
     return jsonify(swag)
 
-SWAGGER_URL = '/documentation' 
-API_URL = '/spec' 
+SWAGGER_URL = '/documentation'
+API_URL = '/spec'
 
 swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL, 
+    SWAGGER_URL,
     API_URL,
     config={
-    'app_name': "Stock2Shop Application"
+        'app_name': "Stock2Shop Application"
     }
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 if __name__ == '__main__':
- app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
