@@ -2,7 +2,8 @@
 
 ## Dependencies
 - Vagrant
-- Virtualbox (Vagrant needs this)
+- VirtualBox (Vagrant needs this)
+  - I've had trouble on Mac with VB so if you run into trouble with it there, I'm sorry!
 
 ## Installation
 First make sure you're in the project root
@@ -15,6 +16,7 @@ In the case where the server isn't automatically running:
 - `$ vagrant ssh` - This will ssh you into the Ubuntu server
 - `vagrant@machine:$ sudo service apache2 restart && sudo service s2s-api restart` - This will run the API server
 
+If you have port conflicts, you can change them in `VagrantFile`. Run `$ vagrant up --provision` to register port forwarding after that.
 ## Endpoints
 Documentation: http://localhost:5000/documentation
 API: http://localhost:5000/
