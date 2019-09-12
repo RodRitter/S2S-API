@@ -1,5 +1,3 @@
-# Stock2Shop API Server
-
 ## Dependencies
 - Vagrant
 - VirtualBox (Vagrant needs this)
@@ -8,7 +6,7 @@
 ## Installation
 First make sure you're in the project root
 
-- `$ vagrant up` - Install the virtual environent. This might take a little while
+- `$ vagrant up` - Installs the virtual environent. This might take a little while to download Ubuntu
   - Once this is done, the server should be running
 - Navigate to `http://localhost:8080` (Frontend)
 
@@ -16,7 +14,7 @@ In the case where the server isn't automatically running:
 - `$ vagrant ssh` - This will ssh you into the Ubuntu server
 - `vagrant@machine:$ sudo service apache2 restart && sudo service s2s-api restart` - This will run the API server
 
-If you have port conflicts, you can change them in `VagrantFile`. Run `$ vagrant up --provision` to register port forwarding after that.
+If you have port conflicts, you can change them in `VagrantFile`. Run `$ vagrant up --provision` to re-register port forwarding after that.
 ## Endpoints
 Documentation: http://localhost:5000/documentation
 API: http://localhost:5000/
@@ -32,6 +30,8 @@ API: http://localhost:5000/
 - `[api]` - Here is the meat of it all. The API code lives here
 
 ## Tech Stack
+I decided to separate the frontend & backend to be mindful of RESTful ideaology
+
 Frontend:
 - `React`
   - React is my go-to frontend framework.
