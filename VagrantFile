@@ -10,11 +10,11 @@ Vagrant.configure("2") do |config|
     apt-get install -qqy apache2
     apt-get install -qqy libapache2-mod-wsgi-py3 python3-flask python-dev python3-pip
     apt-get install -qqy libapache2-mpm-itk
-    pip3 install mysql-connector-python
-    pip3 install -U flask-cors
-    pip3 install flask-restplus
-    pip3 install flask-swagger
-    pip3 install flask-swagger-ui
+    sudo pip3 install mysql-connector-python
+    sudo pip3 install -U flask-cors
+    sudo pip3 install flask-restplus
+    sudo pip3 install flask-swagger
+    sudo pip3 install flask-swagger-ui
 
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
